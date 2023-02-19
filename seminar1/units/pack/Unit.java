@@ -1,17 +1,21 @@
 package pack;
 
-public abstract class Unit {
+public abstract class Unit implements IngameInterface {
     protected String name;
     protected int hp;
     protected int def;
     protected int damage;
     protected boolean isAlive = true;
 
-    Unit(String name, int hp, int def, int damage) {
+    public Unit(String name, int hp, int def, int damage) {
         this.name = name;
         this.hp = hp;
         this.def = def;
         this.damage = damage;
+    }
+
+    public Unit() {
+
     }
 
     /**
