@@ -10,13 +10,16 @@ public class Peasant extends Unit {
     public Peasant(String name) {
         super();
         super.name = name;
-        super.hp = 100;
-        super.def = 15;
-        super.damage = 35;
+        super.hp = 1;
+        super.def = 1;
+        super.max_damage = 1;
+        super.min_damage = 1;
+        super.speed = 3;
+        super.attack = 1;
     }
 
     public void Bottle() {
-        super.damage = super.damage + this.bottleOfAnger;
+        super.max_damage = super.max_damage + this.bottleOfAnger;
     }
 
     @Override

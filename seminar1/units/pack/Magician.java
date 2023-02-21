@@ -10,9 +10,12 @@ public class Magician extends Unit {
     public Magician(String name) {
         super();
         super.name = name;
-        super.hp = 80;
-        super.def = 10;
-        super.damage = 30;
+        super.hp = 30;
+        super.def = 12;
+        super.max_damage = -5;
+        super.min_damage = -5;
+        super.speed = 9;
+        super.attack = 17;
     }
 
     @Override

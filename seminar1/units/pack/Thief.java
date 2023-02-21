@@ -12,9 +12,12 @@ public class Thief extends Unit {
     public Thief(String name) {
         super();
         super.name = name;
-        super.hp = 100;
-        super.def = 15;
-        super.damage = 50;
+        super.hp = 10;
+        super.def = 3;
+        super.max_damage = 4;
+        super.min_damage = 2;
+        super.speed = 6;
+        super.attack = 8;
     }
 
     /**

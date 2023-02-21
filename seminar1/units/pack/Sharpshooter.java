@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class Sharpshooter extends Unit {
     protected Random rand = new Random(); // var for modificate crit 2x 50% chance
+    protected int shots;
 
     public Sharpshooter(String name, int hp, int def, int damage) {
         super(name, hp, def, damage);
@@ -12,9 +13,13 @@ public class Sharpshooter extends Unit {
     public Sharpshooter(String name) {
         super();
         super.name = name;
-        super.hp = 110;
-        super.def = 20;
-        super.damage = 90;
+        super.hp = 15;
+        super.def = 10;
+        super.max_damage = 10;
+        super.min_damage = 8;
+        super.speed = 9;
+        super.attack = 12;
+        this.shots = 32;
     }
 
     /*
@@ -25,7 +30,7 @@ public class Sharpshooter extends Unit {
      */
     @Override
     public void Attack(Unit attacker, Unit defender) {
-        attacker.damage = attacker.damage + attacker.damage * rand.nextInt(2);
+        attacker.max_damage = attacker.max_damage + attacker.max_damage * rand.nextInt(2);
         super.Attack(attacker, defender);
     }
 

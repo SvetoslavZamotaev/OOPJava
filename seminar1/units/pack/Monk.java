@@ -10,9 +10,12 @@ public class Monk extends Unit {
     public Monk(String name) {
         super();
         super.name = name;
-        super.hp = 100;
-        super.def = 15;
-        super.damage = 50;
+        super.hp = 30;
+        super.def = 7;
+        super.max_damage = -4;
+        super.min_damage = -4;
+        super.speed = 5;
+        super.attack = 12;
     }
 
     /**

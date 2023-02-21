@@ -10,9 +10,12 @@ public class Spearman extends Unit {
     public Spearman(String name) {
         super();
         super.name = name;
-        super.hp = 120;
-        super.def = 25;
-        super.damage = 55;
+        super.hp = 10;
+        super.def = 5;
+        super.max_damage = 3;
+        super.min_damage = 1;
+        super.speed = 4;
+        super.attack = 4;
     }
 
     @Override
