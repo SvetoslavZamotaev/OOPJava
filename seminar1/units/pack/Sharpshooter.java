@@ -14,6 +14,7 @@ public class Sharpshooter extends Unit {
         super();
         super.name = name;
         super.hp = 15;
+        super.maxhp = 15;
         super.def = 10;
         super.max_damage = 10;
         super.min_damage = 8;
@@ -22,12 +23,13 @@ public class Sharpshooter extends Unit {
         this.shots = 32;
         super.coords = new PointField(x, y);
         super.whoAm = "Sharpshooter";
+        super.state = "Stand";
     }
 
     @Override
     public String GetInfo() {
         return "i'm a Sharpshooter : " + name + " " + super.coords.GetCoords() + " " + "team"
-                + Integer.toString(super.teamID);
+                + Integer.toString(super.teamID) + " " + "HP:" + Integer.toString(super.hp) + " " + super.state;
     }
 
     @Override

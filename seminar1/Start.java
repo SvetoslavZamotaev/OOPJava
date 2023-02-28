@@ -3,6 +3,8 @@ import java.security.cert.LDAPCertStoreParameters;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
+import java.util.Scanner;
+
 import pack.*;
 
 public class Start {
@@ -12,6 +14,7 @@ public class Start {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
+        ArrayList<Unit> AllTeams = new ArrayList<>();
         System.out.println("--------------Team RED------------------");
         ArrayList<Unit> teamRed = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
@@ -31,13 +34,7 @@ public class Start {
                     break;
             }
         }
-        SetTeam(teamRed, 2);
-        GetInfoTeam(teamRed);
-        System.out.println(" =======Sorted======");
-        SortedTeam(teamRed);
-        GetInfoTeam(teamRed);
-        teamRed.clear();
-
+        SetTeam(teamRed, 1);
         System.out.println("--------------Team BLUE------------------");
         ArrayList<Unit> teamBlue = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
@@ -56,12 +53,27 @@ public class Start {
                     break;
             }
         }
-        SetTeam(teamBlue, 1);
-        GetInfoTeam(teamBlue);
-        System.out.println(" =======Sorted======");
-        SortedTeam(teamBlue);
-        GetInfoTeam(teamBlue);
-        teamBlue.clear();
+        SetTeam(teamBlue, 2);
+        AllTeams.addAll(teamRed);
+        AllTeams.addAll(teamBlue);
+        SortedTeam(AllTeams);
+        System.out.println(" ========= Battlefield==========");
+        GetInfoTeam(AllTeams);
+        Scanner user_input = new Scanner(System.in);
+        System.out.println(" =======Inside of a loop=========");
+        String stop = "";
+        while (stop.equals("")) {
+            for (Unit unit : AllTeams) {
+                if (teamBlue.contains(unit)) {
+                    unit.Step(teamBlue, teamRed);
+                } else {
+                    unit.Step(teamRed, teamBlue);
+                }
+            }
+            GetInfoTeam(AllTeams);
+            stop = user_input.nextLine();
+        }
+        user_input.close();
     }
 
     public static String GetName() {

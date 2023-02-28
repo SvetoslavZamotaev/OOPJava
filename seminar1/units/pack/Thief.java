@@ -14,6 +14,7 @@ public class Thief extends Unit {
         super();
         super.name = name;
         super.hp = 10;
+        super.maxhp = 10;
         super.def = 3;
         super.max_damage = 4;
         super.min_damage = 2;
@@ -21,6 +22,7 @@ public class Thief extends Unit {
         super.attack = 8;
         super.coords = new PointField(x, y);
         super.whoAm = "Thief";
+        super.state = "Stand";
     }
 
     /**
@@ -32,7 +34,8 @@ public class Thief extends Unit {
 
     @Override
     public String GetInfo() {
-        return "I'm a Thief : " + name + " " + super.coords.GetCoords() + " " + "team" + Integer.toString(super.teamID);
+        return "I'm a Thief : " + name + " " + super.coords.GetCoords() + " " + "team" + Integer.toString(super.teamID)
+                + " " + "HP:" + Integer.toString(super.hp) + " " + super.state + " " + super.state;
     }
 
     @Override

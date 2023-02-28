@@ -11,6 +11,7 @@ public class Monk extends Unit {
         super();
         super.name = name;
         super.hp = 30;
+        super.maxhp = 30;
         super.def = 7;
         super.max_damage = -4;
         super.min_damage = -4;
@@ -18,15 +19,13 @@ public class Monk extends Unit {
         super.attack = 12;
         super.coords = new PointField(x, y);
         super.whoAm = "Monk";
+        super.state = "Stand";
     }
-
-    /**
-     * @param person target for healing
-     */
 
     @Override
     public String GetInfo() {
-        return "I'm a Monk : " + name + " " + super.coords.GetCoords() + " " + "team" + Integer.toString(super.teamID);
+        return "I'm a Monk : " + name + " " + super.coords.GetCoords() + " " + "team" + Integer.toString(super.teamID)
+                + " " + "HP:" + Integer.toString(super.hp) + " " + super.state;
     }
 
     @Override
@@ -34,4 +33,15 @@ public class Monk extends Unit {
 
     }
 
+    protected Unit findVeryLow(ArrayList<Unit> team) {
+        int index = 0;
+        int min = 150;
+        for (int i = 0; i < team.size(); i++) {
+            if (min > team.get(i).maxhp - team.get(i).hp) {
+                index = i;
+                min = team.get(i).maxhp - team.get(i).hp;
+            }
+        }
+        return team.get(index);
+    }
 }

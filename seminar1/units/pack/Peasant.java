@@ -12,6 +12,7 @@ public class Peasant extends Unit {
         super();
         super.name = name;
         super.hp = 1;
+        super.maxhp = 1;
         super.def = 1;
         super.max_damage = 1;
         super.min_damage = 1;
@@ -19,17 +20,19 @@ public class Peasant extends Unit {
         super.attack = 1;
         super.coords = new PointField(x, y);
         super.whoAm = "Peasant";
+        super.state = "Stand";
     }
 
     @Override
     public String GetInfo() {
         return "I'm a Peasant : " + name + " " + super.coords.GetCoords() + " " + "team"
-                + Integer.toString(super.teamID);
+                + Integer.toString(super.teamID) + " " + "HP:" + Integer.toString(super.hp) + " " + super.state;
     }
 
     @Override
     public void Step(ArrayList<Unit> team1, ArrayList<Unit> team2) {
-
+        if (!state.equals("Die"))
+            state = "Stand";
     }
 
 }

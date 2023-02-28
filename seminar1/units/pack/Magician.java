@@ -12,6 +12,7 @@ public class Magician extends Unit {
         super();
         super.name = name;
         super.hp = 30;
+        super.maxhp = 30;
         super.def = 12;
         super.max_damage = -5;
         super.min_damage = -5;
@@ -19,16 +20,32 @@ public class Magician extends Unit {
         super.attack = 17;
         super.coords = new PointField(x, y);
         super.whoAm = "Magician";
+        super.state = "Stand";
     }
 
     @Override
     public String GetInfo() {
         return "i'm a Magician : " + name + " " + super.coords.GetCoords() + " " + "team"
-                + Integer.toString(super.teamID);
+                + Integer.toString(super.teamID) + " " + "HP:" + Integer.toString(super.hp) + " " + super.state;
     }
 
     @Override
     public void Step(ArrayList<Unit> team1, ArrayList<Unit> team2) {
+        if (state.equals("die"))
+            return;
+        Unit victim = findVeryLow(team1);
+        victim.getDamage(min_damage);
+    }
 
+    protected Unit findVeryLow(ArrayList<Unit> team) {
+        int index = 0;
+        int min = 150;
+        for (int i = 0; i < team.size(); i++) {
+            if (min > team.get(i).maxhp - team.get(i).hp) {
+                index = i;
+                min = team.get(i).maxhp - team.get(i).hp;
+            }
+        }
+        return team.get(index);
     }
 }

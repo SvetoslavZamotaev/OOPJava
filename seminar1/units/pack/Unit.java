@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public abstract class Unit implements IngameInterface {
     protected String name;
     protected int hp;
+    protected int maxhp;
     protected int def;
     protected int attack;
     protected int min_damage;
@@ -65,6 +66,8 @@ public abstract class Unit implements IngameInterface {
             hp = 0;
             this.state = "Die";
         }
-
+        if (hp > maxhp) {
+            hp = maxhp;
+        }
     }
 }
