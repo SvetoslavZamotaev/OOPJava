@@ -1,13 +1,14 @@
 package pack;
 
+import java.util.ArrayList;
+
 public class Peasant extends Unit {
-    protected int bottleOfAnger = 20; // + damage from bottle of fire water
 
     public Peasant(String name, int hp, int def, int damage) {
         super(name, hp, def, damage);
     }
 
-    public Peasant(String name) {
+    public Peasant(String name, int x, int y) {
         super();
         super.name = name;
         super.hp = 1;
@@ -16,19 +17,18 @@ public class Peasant extends Unit {
         super.min_damage = 1;
         super.speed = 3;
         super.attack = 1;
-    }
-
-    public void Bottle() {
-        super.max_damage = super.max_damage + this.bottleOfAnger;
+        super.coords = new PointField(x, y);
+        super.whoAm = "Peasant";
     }
 
     @Override
     public String GetInfo() {
-        return "I'm a Peasant : " + name;
+        return "I'm a Peasant : " + name + " " + super.coords.GetCoords() + " " + "team"
+                + Integer.toString(super.teamID);
     }
 
     @Override
-    public void Step() {
+    public void Step(ArrayList<Unit> team1, ArrayList<Unit> team2) {
 
     }
 

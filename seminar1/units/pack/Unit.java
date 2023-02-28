@@ -1,5 +1,7 @@
 package pack;
 
+import java.util.ArrayList;
+
 public abstract class Unit implements IngameInterface {
     protected String name;
     protected int hp;
@@ -8,7 +10,10 @@ public abstract class Unit implements IngameInterface {
     protected int min_damage;
     protected int max_damage;
     protected int speed;
-    protected boolean isAlive = true;
+    protected String state;
+    protected PointField coords;
+    protected int teamID;
+    protected String whoAm;
 
     public Unit(String name, int hp, int def, int damage) {
         this.name = name;
@@ -26,25 +31,8 @@ public abstract class Unit implements IngameInterface {
      */
     public void getInfo() {
         System.out.printf("[name:%s] [hp:%d] [def:%d] [damage:%d] [isAlive?:%b].", this.name, this.hp, this.def,
-                this.max_damage, this.isAlive);
+                this.max_damage, this.state);
         System.out.println();
-    }
-
-    /**
-     * @param attacker guy who attack!
-     * @param defender guy who takes damage!
-     */
-    public void Attack(Unit attacker, Unit defender) {
-        if (defender.isAlive) {
-            defender.hp = (defender.hp + defender.def) - attacker.max_damage;
-            if (defender.hp <= 0) {
-                defender.isAlive = false;
-                System.out.println(attacker.name + " kill " + defender.name);
-            }
-        } else {
-            System.out.printf(" %s is already dead, %s cant hit him \n", defender.name, attacker.name);
-        }
-
     }
 
     public int GetSpeed() {
@@ -53,5 +41,30 @@ public abstract class Unit implements IngameInterface {
 
     public int GetHP() {
         return this.hp;
+    }
+
+    public void SetTeam(int id) {
+        this.teamID = id;
+    }
+
+    protected int findNearest(ArrayList<Unit> team) {
+        double min = Double.MAX_VALUE;
+        int index = 0;
+        for (int i = 0; i < team.size(); i++) {
+            if (min > coords.CalculateDist(team.get(i).coords)) {
+                index = i;
+                min = coords.CalculateDist(team.get(i).coords);
+            }
+        }
+        return index;
+    }
+
+    public void getDamage(int damage) {
+        this.hp -= damage;
+        if (hp <= 0) {
+            hp = 0;
+            this.state = "Die";
+        }
+
     }
 }

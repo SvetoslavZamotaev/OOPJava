@@ -1,13 +1,13 @@
 package pack;
 
-public class Monk extends Unit {
-    protected int spirit = 50;
+import java.util.ArrayList;
 
+public class Monk extends Unit {
     public Monk(String name, int hp, int def, int damage) {
         super(name, hp, def, damage);
     }
 
-    public Monk(String name) {
+    public Monk(String name, int x, int y) {
         super();
         super.name = name;
         super.hp = 30;
@@ -16,22 +16,21 @@ public class Monk extends Unit {
         super.min_damage = -4;
         super.speed = 5;
         super.attack = 12;
+        super.coords = new PointField(x, y);
+        super.whoAm = "Monk";
     }
 
     /**
      * @param person target for healing
      */
-    public void Healing(Unit person) {
-        person.hp = person.hp + this.spirit;
-    }
 
     @Override
     public String GetInfo() {
-        return "I'm a Monk : " + name;
+        return "I'm a Monk : " + name + " " + super.coords.GetCoords() + " " + "team" + Integer.toString(super.teamID);
     }
 
     @Override
-    public void Step() {
+    public void Step(ArrayList<Unit> team1, ArrayList<Unit> team2) {
 
     }
 

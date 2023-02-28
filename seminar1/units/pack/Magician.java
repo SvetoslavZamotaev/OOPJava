@@ -1,13 +1,14 @@
 package pack;
 
+import java.util.ArrayList;
+
 public class Magician extends Unit {
-    protected int spellattack = 70; // additional spell damage
 
     public Magician(String name, int hp, int def, int damage) {
         super(name, hp, def, damage);
     }
 
-    public Magician(String name) {
+    public Magician(String name, int x, int y) {
         super();
         super.name = name;
         super.hp = 30;
@@ -16,22 +17,18 @@ public class Magician extends Unit {
         super.min_damage = -5;
         super.speed = 9;
         super.attack = 17;
+        super.coords = new PointField(x, y);
+        super.whoAm = "Magician";
     }
 
     @Override
     public String GetInfo() {
-        return "i'm a Magician : " + name;
+        return "i'm a Magician : " + name + " " + super.coords.GetCoords() + " " + "team"
+                + Integer.toString(super.teamID);
     }
 
     @Override
-    public void Step() {
+    public void Step(ArrayList<Unit> team1, ArrayList<Unit> team2) {
 
-    }
-
-    /**
-     * @param target //target for additional magic attack
-     */
-    public void MagicAttack(Unit target) {
-        target.hp = target.hp - this.spellattack;
     }
 }

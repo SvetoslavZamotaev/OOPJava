@@ -12,75 +12,56 @@ public class Start {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-        // Peasant peasant = new Peasant("Carl", 120, 25, 35);
-        // Magician mage = new Magician("Professor", 100, 15, 25);
-        // Monk monk = new Monk("monk", 100, 10, 25);
-        // Crossbowman bow = new Crossbowman("bow", 110, 30, 45);
-        // Spearman spear = new Spearman("jack", 130, 40, 50);
-        // Thief rouge = new Thief("shadow", 90, 15, 50);
-        // Sharpshooter sniper = new Sharpshooter("killer", 120, 20, 50);
+        System.out.println("--------------Team RED------------------");
         ArrayList<Unit> teamRed = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             switch (new Random().nextInt(3)) {
                 case 0:
-                    teamRed.add(new Magician(GetName()));
+                    teamRed.add(new Magician(GetName(), i, 9));
                     break;
                 case 1:
-                    teamRed.add(new Thief(GetName()));
+                    teamRed.add(new Thief(GetName(), i, 9));
                     break;
                 case 2:
-                    teamRed.add(new Sharpshooter(GetName()));
+                    teamRed.add(new Sharpshooter(GetName(), i, 9));
                     break;
 
                 case 3:
-                    teamRed.add(new Peasant(GetName()));
+                    teamRed.add(new Peasant(GetName(), i, 9));
                     break;
             }
         }
-        System.out.println("--------------Team RED------------------");
-        teamRed.sort(new Comparator<Unit>() {
-            @Override
-            public int compare(Unit o1, Unit o2) {
-                if (o2.GetSpeed() == o1.GetSpeed()) {
-                    return o2.GetHP() - o1.GetHP();
-                }
-                return o2.GetSpeed() - o1.GetSpeed();
-            }
-        });
+        SetTeam(teamRed, 2);
         GetInfoTeam(teamRed);
-        teamRed.clear();// Удаляю чтоб несколько раз запускать и проверять состав игроков
+        System.out.println(" =======Sorted======");
+        SortedTeam(teamRed);
+        GetInfoTeam(teamRed);
+        teamRed.clear();
 
+        System.out.println("--------------Team BLUE------------------");
         ArrayList<Unit> teamBlue = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             switch (new Random().nextInt(3)) {
                 case 0:
-                    teamBlue.add(new Spearman(GetName()));
+                    teamBlue.add(new Spearman(GetName(), i, 0));
                     break;
                 case 1:
-                    teamBlue.add(new Crossbowman(GetName()));
+                    teamBlue.add(new Crossbowman(GetName(), i, 0));
                     break;
                 case 2:
-                    teamBlue.add(new Monk(GetName()));
+                    teamBlue.add(new Monk(GetName(), i, 0));
                     break;
                 case 3:
-                    teamBlue.add(new Peasant(GetName()));
+                    teamBlue.add(new Peasant(GetName(), i, 0));
                     break;
             }
-
         }
-        System.out.println("--------------Team BLUE------------------");
-        teamBlue.sort(new Comparator<Unit>() {
-            @Override
-            public int compare(Unit o1, Unit o2) {
-                if (o2.GetSpeed() == o1.GetSpeed()) {
-                    return o2.GetHP() - o1.GetHP();
-                }
-                return o2.GetSpeed() - o1.GetSpeed();
-            }
-        });
+        SetTeam(teamBlue, 1);
         GetInfoTeam(teamBlue);
-        teamRed.clear(); // Удаляю чтоб несколько раз запускать и проверять состав игроков
-
+        System.out.println(" =======Sorted======");
+        SortedTeam(teamBlue);
+        GetInfoTeam(teamBlue);
+        teamBlue.clear();
     }
 
     public static String GetName() {
@@ -91,5 +72,24 @@ public class Start {
         for (Unit unit : list) {
             System.out.println(unit.GetInfo());
         }
+    }
+
+    public static ArrayList<Unit> SetTeam(ArrayList<Unit> list, int numberOfTeam) {
+        for (Unit unit : list) {
+            unit.SetTeam(numberOfTeam);
+        }
+        return list;
+    }
+
+    public static void SortedTeam(ArrayList<Unit> arr) {
+        arr.sort(new Comparator<Unit>() {
+            @Override
+            public int compare(Unit o1, Unit o2) {
+                if (o2.GetSpeed() == o1.GetSpeed()) {
+                    return o2.GetHP() - o1.GetHP();
+                }
+                return o2.GetSpeed() - o1.GetSpeed();
+            }
+        });
     }
 }

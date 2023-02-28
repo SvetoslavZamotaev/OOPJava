@@ -1,5 +1,7 @@
 package pack;
 
+import java.util.ArrayList;
+
 public class Spearman extends Unit {
     protected int ignoringDef = 20;
 
@@ -7,7 +9,7 @@ public class Spearman extends Unit {
         super(name, hp, def, damage);
     }
 
-    public Spearman(String name) {
+    public Spearman(String name, int x, int y) {
         super();
         super.name = name;
         super.hp = 10;
@@ -16,21 +18,18 @@ public class Spearman extends Unit {
         super.min_damage = 1;
         super.speed = 4;
         super.attack = 4;
-    }
-
-    @Override
-    public void Attack(Unit attacker, Unit defender) {
-        defender.def = defender.def - this.ignoringDef;
-        super.Attack(attacker, defender);
+        super.coords = new PointField(x, y);
+        super.whoAm = "Spearman";
     }
 
     @Override
     public String GetInfo() {
-        return "i'm a Spearman : " + name;
+        return "i'm a Spearman : " + name + " " + super.coords.GetCoords() + " " + "team"
+                + Integer.toString(super.teamID);
     }
 
     @Override
-    public void Step() {
+    public void Step(ArrayList<Unit> team1, ArrayList<Unit> team2) {
 
     }
 

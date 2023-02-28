@@ -1,5 +1,6 @@
 package pack;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Thief extends Unit {
@@ -9,7 +10,7 @@ public class Thief extends Unit {
         super(name, hp, def, damage);
     }
 
-    public Thief(String name) {
+    public Thief(String name, int x, int y) {
         super();
         super.name = name;
         super.hp = 10;
@@ -18,6 +19,8 @@ public class Thief extends Unit {
         super.min_damage = 2;
         super.speed = 6;
         super.attack = 8;
+        super.coords = new PointField(x, y);
+        super.whoAm = "Thief";
     }
 
     /**
@@ -29,11 +32,11 @@ public class Thief extends Unit {
 
     @Override
     public String GetInfo() {
-        return "I'm a Thief : " + name;
+        return "I'm a Thief : " + name + " " + super.coords.GetCoords() + " " + "team" + Integer.toString(super.teamID);
     }
 
     @Override
-    public void Step() {
+    public void Step(ArrayList<Unit> team1, ArrayList<Unit> team2) {
 
     }
 
