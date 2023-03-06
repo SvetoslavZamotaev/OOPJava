@@ -6,4 +6,6 @@ public interface IngameInterface {
     void Step(ArrayList<Unit> team1, ArrayList<Unit> team2);
 
     String GetInfo();
+
+    StringBuilder ggetInfo();
 }

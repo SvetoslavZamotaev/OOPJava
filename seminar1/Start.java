@@ -4,76 +4,66 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
 import java.util.Scanner;
-
+import static java.nio.charset.StandardCharsets.UTF_8;
 import pack.*;
 
 public class Start {
+    public static ArrayList<Unit> AllTeams = new ArrayList<>();
+    public static ArrayList<Unit> alliance = new ArrayList<>();
+    public static ArrayList<Unit> horde = new ArrayList<>();
 
-    /**
-     * @param args
-     * @throws Exception
-     */
     public static void main(String[] args) throws Exception {
-        ArrayList<Unit> AllTeams = new ArrayList<>();
-        System.out.println("--------------Team RED------------------");
-        ArrayList<Unit> teamRed = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            switch (new Random().nextInt(3)) {
+            switch (new Random().nextInt(4)) {
                 case 0:
-                    teamRed.add(new Magician(GetName(), i, 9));
+                    horde.add(new Magician(GetName(), i + 1, 1));
                     break;
                 case 1:
-                    teamRed.add(new Thief(GetName(), i, 9));
+                    horde.add(new Thief(GetName(), i + 1, 1));
                     break;
                 case 2:
-                    teamRed.add(new Sharpshooter(GetName(), i, 9));
+                    horde.add(new Sharpshooter(GetName(), i + 1, 1));
                     break;
 
                 case 3:
-                    teamRed.add(new Peasant(GetName(), i, 9));
+                    horde.add(new Peasant(GetName(), i + 1, 1));
                     break;
             }
         }
-        SetTeam(teamRed, 1);
-        System.out.println("--------------Team BLUE------------------");
-        ArrayList<Unit> teamBlue = new ArrayList<>();
+        SetTeam(horde, 1);
         for (int i = 0; i < 10; i++) {
-            switch (new Random().nextInt(3)) {
+            switch (new Random().nextInt(4)) {
                 case 0:
-                    teamBlue.add(new Spearman(GetName(), i, 0));
+                    alliance.add(new Spearman(GetName(), i + 1, 10));
                     break;
                 case 1:
-                    teamBlue.add(new Crossbowman(GetName(), i, 0));
+                    alliance.add(new Crossbowman(GetName(), i + 1, 10));
                     break;
                 case 2:
-                    teamBlue.add(new Monk(GetName(), i, 0));
+                    alliance.add(new Monk(GetName(), i + 1, 10));
                     break;
                 case 3:
-                    teamBlue.add(new Peasant(GetName(), i, 0));
+                    alliance.add(new Peasant(GetName(), i + 1, 10));
                     break;
             }
         }
-        SetTeam(teamBlue, 2);
-        AllTeams.addAll(teamRed);
-        AllTeams.addAll(teamBlue);
+        SetTeam(alliance, 2);
+        AllTeams.addAll(horde);
+        AllTeams.addAll(alliance);
         SortedTeam(AllTeams);
-        System.out.println(" ========= Battlefield==========");
-        GetInfoTeam(AllTeams);
+        System.out.println(" ========= русские буквы  ==========");
         Scanner user_input = new Scanner(System.in);
-        System.out.println(" =======Inside of a loop=========");
-        String stop = "";
-        while (stop.equals("")) {
+        while (true) {
+            View.view();
+            user_input.nextLine();
             for (Unit unit : AllTeams) {
-                if (teamBlue.contains(unit)) {
-                    unit.Step(teamBlue, teamRed);
+                if (alliance.contains(unit)) {
+                    unit.Step(alliance, horde);
                 } else {
-                    unit.Step(teamRed, teamBlue);
+                    unit.Step(horde, alliance);
                 }
             }
-            GetInfoTeam(AllTeams);
-            stop = user_input.nextLine();
         }
-        user_input.close();
     }
 
     public static String GetName() {

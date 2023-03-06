@@ -48,4 +48,15 @@ public class Magician extends Unit {
         }
         return team.get(index);
     }
+
+    @Override
+    public StringBuilder ggetInfo() {
+        StringBuilder builder = new StringBuilder();
+        return builder.append("Колдун: \t").append(Magician.super.name)
+                .append("\t| ATK:\t").append(Magician.super.attack)
+                .append("\t| HP:\t").append(Magician.super.hp)
+                .append(" \t| MP:\t").append("mana")
+                .append("\t|").append("\t| (X.Y) : ").append(Magician.super.coords.x).append(".")
+                .append(Magician.super.coords.y);
+    }
 }

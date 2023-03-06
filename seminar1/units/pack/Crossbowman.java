@@ -32,7 +32,9 @@ public class Crossbowman extends Unit {
     @Override
     public String GetInfo() {
         return "I'm a Crossbowman : " + name + " " + super.coords.GetCoords() + " " + "team"
-                + Integer.toString(super.teamID) + " " + "HP:" + Integer.toString(super.hp) + " " + super.state;
+                + Integer.toString(super.teamID) +
+                " " + "HP:" + Integer.toString(super.hp) + " " + super.state + " "
+                + "shots :" + this.shots;
     }
 
     @Override
@@ -50,6 +52,17 @@ public class Crossbowman extends Unit {
             }
         }
         shots--;
+    }
+
+    @Override
+    public StringBuilder ggetInfo() {
+        StringBuilder builder = new StringBuilder();
+        return builder.append("Арбалет: \t").append(Crossbowman.super.name)
+                .append("\t| ATK:\t").append(Crossbowman.super.attack)
+                .append("\t| HP:\t").append(Crossbowman.super.hp)
+                .append(" \t| Arrows:").append(Crossbowman.this.shots)
+                .append("\t|").append("\t| (X.Y) : ").append(Crossbowman.super.coords.x).append(".")
+                .append(Crossbowman.super.coords.y);
     }
 
 }

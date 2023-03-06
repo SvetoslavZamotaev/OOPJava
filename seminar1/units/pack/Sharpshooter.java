@@ -29,7 +29,8 @@ public class Sharpshooter extends Unit {
     @Override
     public String GetInfo() {
         return "i'm a Sharpshooter : " + name + " " + super.coords.GetCoords() + " " + "team"
-                + Integer.toString(super.teamID) + " " + "HP:" + Integer.toString(super.hp) + " " + super.state;
+                + Integer.toString(super.teamID) + " " + "HP:" + Integer.toString(super.hp) + " " + super.state + " "
+                + "shots :" + this.shots;
     }
 
     @Override
@@ -47,6 +48,17 @@ public class Sharpshooter extends Unit {
             }
         }
         shots--;
+    }
+
+    @Override
+    public StringBuilder ggetInfo() {
+        StringBuilder builder = new StringBuilder();
+        return builder.append("Снайпер:\t").append(Sharpshooter.super.name)
+                .append("\t| ATK:\t").append(Sharpshooter.super.attack)
+                .append("\t| HP:\t").append(Sharpshooter.super.hp)
+                .append(" \t| Arrows:").append(Sharpshooter.this.shots)
+                .append("\t|").append("\t| (X.Y) : ").append(Sharpshooter.super.coords.x).append(".")
+                .append(Sharpshooter.super.coords.y);
     }
 
 }

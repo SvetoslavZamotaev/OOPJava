@@ -35,4 +35,14 @@ public class Peasant extends Unit {
             state = "Stand";
     }
 
+    @Override
+    public StringBuilder ggetInfo() {
+        StringBuilder builder = new StringBuilder();
+        return builder.append("Фермер: \t").append(Peasant.super.name)
+                .append("\t| ATK:\t").append(Peasant.super.attack)
+                .append("\t| HP:\t").append(Peasant.super.hp)
+                .append(" \t| Arrows: ").append("ShotsP")
+                .append("\t|").append("\t| (X.Y) : ").append(Peasant.super.coords.x).append(".")
+                .append(Peasant.super.coords.y);
+    }
 }

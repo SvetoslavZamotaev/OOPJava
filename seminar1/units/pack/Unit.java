@@ -27,9 +27,15 @@ public abstract class Unit implements IngameInterface {
 
     }
 
-    /**
-     * Getting info about stats of character.
-     */
+    @Override
+    public StringBuilder ggetInfo() {
+        return new StringBuilder("");
+    }
+
+    public int[] getCoords() {
+        return new int[] { coords.x, coords.y };
+    }
+
     public void getInfo() {
         System.out.printf("[name:%s] [hp:%d] [def:%d] [damage:%d] [isAlive?:%b].", this.name, this.hp, this.def,
                 this.max_damage, this.state);
@@ -48,11 +54,21 @@ public abstract class Unit implements IngameInterface {
         this.teamID = id;
     }
 
+    @Override
+    public String toString() {
+        return name +
+                " H:" + hp +
+                " D:" + def +
+                " A:" + attack +
+                " Dmg:" + Math.abs((min_damage + max_damage) / 2) +
+                " " + state;
+    }
+
     protected int findNearest(ArrayList<Unit> team) {
         double min = Double.MAX_VALUE;
         int index = 0;
         for (int i = 0; i < team.size(); i++) {
-            if (min > coords.CalculateDist(team.get(i).coords)) {
+            if (min > coords.CalculateDist(team.get(i).coords) && !team.get(i).state.equals("Die")) {
                 index = i;
                 min = coords.CalculateDist(team.get(i).coords);
             }

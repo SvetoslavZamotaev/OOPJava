@@ -35,4 +35,13 @@ public class Spearman extends Unit {
 
     }
 
+    @Override
+    public StringBuilder ggetInfo() {
+        StringBuilder builder = new StringBuilder();
+        return builder.append("Копейщик:\t").append(Spearman.super.name)
+                .append("\t| ATK:\t").append(Spearman.super.attack)
+                .append("\t| HP:\t").append(Spearman.super.hp)
+                .append(" \t|\t\t\t|").append("\t| (X.Y) : ").append(Spearman.super.coords.x).append(".")
+                .append(Spearman.super.coords.y);
+    }
 }

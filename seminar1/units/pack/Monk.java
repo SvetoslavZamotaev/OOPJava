@@ -44,4 +44,15 @@ public class Monk extends Unit {
         }
         return team.get(index);
     }
+
+    @Override
+    public StringBuilder ggetInfo() {
+        StringBuilder builder = new StringBuilder();
+        return builder.append("Монах:  \t").append(Monk.super.name)
+                .append("\t| ATK:\t").append(Monk.super.attack)
+                .append("\t| HP:\t").append(Monk.super.hp)
+                .append(" \t| MP:\t").append("mana")
+                .append("\t|").append("\t| (X.Y) : ").append(Monk.super.coords.x).append(".")
+                .append(Monk.super.coords.y);
+    }
 }

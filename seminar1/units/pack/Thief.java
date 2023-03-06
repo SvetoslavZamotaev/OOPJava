@@ -34,13 +34,25 @@ public class Thief extends Unit {
 
     @Override
     public String GetInfo() {
-        return "I'm a Thief : " + name + " " + super.coords.GetCoords() + " " + "team" + Integer.toString(super.teamID)
-                + " " + "HP:" + Integer.toString(super.hp) + " " + super.state + " " + super.state;
+        return "I'm a Thief : " + name +
+                " " + super.coords.GetCoords() +
+                " " + "team" + Integer.toString(super.teamID)
+                + " " + "HP:" + Integer.toString(super.hp) + " " + super.state;
     }
 
     @Override
     public void Step(ArrayList<Unit> team1, ArrayList<Unit> team2) {
 
+    }
+
+    @Override
+    public StringBuilder ggetInfo() {
+        StringBuilder builder = new StringBuilder();
+        return builder.append("Бандит: \t").append(Thief.super.name)
+                .append("\t| ATK:\t").append(Thief.super.attack)
+                .append("\t| HP:\t").append(Thief.super.hp)
+                .append(" \t|\t\t\t|").append("\t| (X.Y) : ").append(Thief.super.coords.x).append(".")
+                .append(Thief.super.coords.y);
     }
 
 }
