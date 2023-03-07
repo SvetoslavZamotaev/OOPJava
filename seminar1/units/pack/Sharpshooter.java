@@ -1,7 +1,6 @@
 package pack;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Sharpshooter extends Unit {
     protected int shots;

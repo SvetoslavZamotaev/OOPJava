@@ -32,7 +32,29 @@ public class Spearman extends Unit {
 
     @Override
     public void Step(ArrayList<Unit> team1, ArrayList<Unit> team2) {
-
+        if (state.equals("Die"))
+            return;
+        Unit victim = team2.get(findNearest(team2));
+        if (victim.coords.CalculateDist(coords) < 2) {
+            int damage = (victim.def - attack) > 0 ? min_damage
+                    : (victim.def - attack) < 0 ? max_damage : (max_damage + min_damage) / 2;
+            victim.getDamage(damage);
+        } else {
+            PointField temp = coords.chooseWay(victim.coords);
+            if (Math.abs(temp.x) < Math.abs(temp.y)) {
+                if (coords.chooseWay(victim.coords).y > 0) {
+                    coords.y--;
+                } else {
+                    coords.y++;
+                }
+            } else {
+                if (coords.chooseWay(victim.coords).x > 0) {
+                    coords.x--;
+                } else {
+                    coords.x++;
+                }
+            }
+        }
     }
 
     @Override

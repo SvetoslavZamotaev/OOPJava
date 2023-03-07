@@ -1,10 +1,9 @@
-import java.lang.reflect.Array;
-import java.security.cert.LDAPCertStoreParameters;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
 import java.util.Scanner;
-import static java.nio.charset.StandardCharsets.UTF_8;
+
 import pack.*;
 
 public class Start {
@@ -13,7 +12,7 @@ public class Start {
     public static ArrayList<Unit> horde = new ArrayList<>();
 
     public static void main(String[] args) throws Exception {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i <= 10; i++) {
             switch (new Random().nextInt(4)) {
                 case 0:
                     horde.add(new Magician(GetName(), i + 1, 1));
@@ -31,7 +30,7 @@ public class Start {
             }
         }
         SetTeam(horde, 1);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i <= 10; i++) {
             switch (new Random().nextInt(4)) {
                 case 0:
                     alliance.add(new Spearman(GetName(), i + 1, 10));
@@ -51,9 +50,9 @@ public class Start {
         AllTeams.addAll(horde);
         AllTeams.addAll(alliance);
         SortedTeam(AllTeams);
-        System.out.println(" ========= русские буквы  ==========");
+        System.out.println(" ========= fg ==========");
         Scanner user_input = new Scanner(System.in);
-        while (true) {
+        while (countAlive(alliance)) {
             View.view();
             user_input.nextLine();
             for (Unit unit : AllTeams) {
@@ -63,6 +62,11 @@ public class Start {
                     unit.Step(horde, alliance);
                 }
             }
+        }
+        if (countAlive(alliance)) {
+            System.out.println("Right Win");
+        } else if (countAlive(horde)) {
+            System.out.println("left Win");
         }
     }
 
@@ -93,5 +97,18 @@ public class Start {
                 return o2.GetSpeed() - o1.GetSpeed();
             }
         });
+    }
+
+    public static boolean countAlive(ArrayList<Unit> team) {
+        int countsTeam = 11;
+        for (Unit unit : team) {
+            if (unit.GetHP() == 0 && unit.getState().equals("Die")) {
+                countsTeam--;
+            }
+        }
+        if (countsTeam == 0) {
+            return false;
+        }
+        return true;
     }
 }

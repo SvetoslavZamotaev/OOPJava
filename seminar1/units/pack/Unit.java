@@ -50,6 +50,14 @@ public abstract class Unit implements IngameInterface {
         return this.hp;
     }
 
+    public int getTeamID() {
+        return teamID;
+    }
+
+    public String getState() {
+        return state;
+    }
+
     public void SetTeam(int id) {
         this.teamID = id;
     }
@@ -58,8 +66,8 @@ public abstract class Unit implements IngameInterface {
     public String toString() {
         return name +
                 " H:" + hp +
-                " D:" + def +
-                " A:" + attack +
+                " D:" + coords.x +
+                " A:" + coords.y +
                 " Dmg:" + Math.abs((min_damage + max_damage) / 2) +
                 " " + state;
     }

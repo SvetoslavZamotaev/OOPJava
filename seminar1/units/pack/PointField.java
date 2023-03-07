@@ -17,4 +17,9 @@ public class PointField {
         return String.format("[x:%s;y:%s]", this.x, this.y);
     }
 
+    protected PointField chooseWay(PointField opponent) {
+
+        return new PointField(x - opponent.x, y - opponent.y);
+    }
+
 }
